@@ -80,7 +80,7 @@ async function run() {
       owner,
       repo,
       issue_number: prNumber,
-      body: `Your changes have been deployed! You can view the deployed environment testinggg [here](${deployedUrl}).`,
+      body: `Your changes have been deployed! You can view the deployed environment testinggg000 [here](${deployedUrl}).`,
     });
   } else if (
     context.eventName === "pull_request" &&
