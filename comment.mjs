@@ -28,7 +28,7 @@ async function run() {
     contex.eventName === "pull_request" &&
     contex.payload.action === "closed"
   ) {
-    console.log(`Cleaning up resources for PR #${prNumber}...`);
+    console.log(`Cleaning up resources for fgfg PR #${prNumber}...`);
   }
 }
 
