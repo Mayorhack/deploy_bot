@@ -37,7 +37,7 @@
 //   process.exit(1);
 // });
 import { Octokit } from "octokit";
-import * as github from "@actions/github";
+import { context } from "@actions/github";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -50,31 +50,18 @@ const octokit = new Octokit({
 
 async function run() {
   // Mock context for local testing
+  const contex = context;
 
-  const context = {
-    eventName: "pull_request",
-    payload: {
-      pull_request: {
-        number: 1, // replace with an actual PR number for testing
-      },
-      action: "opened", // or 'closed' for testing
-    },
-    repo: {
-      owner: "Mayorhack",
-      repo: "lsp",
-    },
-  };
-
-  const prNumber = context.payload.pull_request.number;
-  const owner = context.repo.owner;
-  const repo = context.repo.repo;
+  const prNumber = contex.payload.pull_request.number;
+  const owner = contex.repo.owner;
+  const repo = contex.repo.repo;
 
   // Replace with your deployed environment URL
   const deployedUrl = `https://your-deployed-environment.com/pr-${prNumber}`;
 
   if (
-    context.eventName === "pull_request" &&
-    context.payload.action !== "closed"
+    contex.eventName === "pull_request" &&
+    contex.payload.action !== "closed"
   ) {
     await octokit.rest.issues.createComment({
       owner,
@@ -83,8 +70,8 @@ async function run() {
       body: `Your changes have been deployed! You can view the deployed environment testinggg000 [here](${deployedUrl}).`,
     });
   } else if (
-    context.eventName === "pull_request" &&
-    context.payload.action === "closed"
+    contex.eventName === "pull_request" &&
+    contex.payload.action === "closed"
   ) {
     console.log(`Cleaning up resources for PR #${prNumber}...`);
     // Add your cleanup logic here
