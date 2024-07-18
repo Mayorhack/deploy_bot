@@ -18,7 +18,7 @@ async function run() {
     contex.eventName === "pull_request" &&
     contex.payload.action !== "closed"
   ) {
-    await octokit.issues.createComment({
+    await octokit.issues.create({
       owner,
       repo,
       issue_number: prNumber,
@@ -28,7 +28,7 @@ async function run() {
     contex.eventName === "pull_request" &&
     contex.payload.action === "closed"
   ) {
-    console.log(`Cleaning up resources for PR #${prNumber}...`);
+    console.log(`Cleaning up resources for bdh PR #${prNumber}...`);
   }
 }
 
