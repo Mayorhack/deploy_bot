@@ -25,7 +25,7 @@ jobs:
       - name: Run deployment script
         run: node ./comment.mjs
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          TOKEN: ${{ secrets.TOKEN }}
 
   cleanup:
     if: github.event.action == 'closed'
@@ -46,4 +46,4 @@ jobs:
       - name: Run cleanup script
         run: node ./comment.mjs
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          TOKEN: ${{ secrets.TOKEN }}
